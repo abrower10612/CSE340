@@ -1,0 +1,378 @@
+@media screen and (min-width: 600px) {
+
+  html {
+    background-image: url("../images/site/small_check.jpg");
+    background-size: cover;
+    }
+
+  header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+  }
+
+  header img {
+    width: 30%;
+  }
+
+  .container {
+    display: none;
+  }
+
+  nav {
+    display: block !important;
+  }
+
+  nav ul {
+    display: flex;
+    width: 100%;
+    flex-direction: row;
+    background-color: #3a3a3a;
+    padding: 0;
+    margin: 0;
+  }
+  
+  nav ul li {
+    list-style-type: none;
+    color: #ffffff;
+    padding: 10px 0px;
+  }
+  
+  nav ul li a {
+    color: #ffffff;
+    text-decoration: none;
+    padding: 10px;
+  }
+  
+  nav ul li a:hover {
+    background-color: #4c96d7;
+    padding: 10px;
+  }
+    
+  body {
+    border: solid 5px #4c96d7;
+    margin: 30px auto;
+    max-width: 1200px;
+  }
+  
+  .myAccount {
+    display: inline;
+    font-size: 1.3em;
+  }
+
+  #welcome {
+    text-align: right;
+    margin: 0 20px 20px 0;
+    display: inline;
+    font-size: 1.3em;
+  }
+  
+  main {
+    padding: 5px;
+  }
+  
+  h1 {
+    font-size: 40px;
+    margin: 0 0 10px 0;
+  }
+  
+  #features {
+    margin-left: 30px;
+    color: #4c96d7;
+    z-index: 1000;
+    position: relative;
+    font-size: 30px;
+  }
+  
+  .delorean {
+    width: 100%;
+    z-index: 1;
+    position: relative;
+    bottom: 200px;
+    margin: 0;
+  }
+  
+  .buttondiv {
+    text-align: left;
+    margin-bottom: 10px;
+    position: relative;
+    z-index: 1000;
+  }
+  
+  .buttonLarge {
+    display: initial;
+    background-color: #4c96d7;;
+    color: #3a3a3a;
+    padding: 7px 20px;
+    font-size: 1.5rem;
+    margin: 30px;
+    position: initial;
+  }
+
+  .buttonSmall {
+    display: none;
+  }
+
+  .deloreanInfo {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: 1fr;
+    margin: 10px;
+    position: relative;
+    bottom: 100px;
+  }
+
+  .deloreanInfo h3 {
+    font-size: 30px;
+  }
+
+  .upgradeInfo {
+    grid-column: 1;
+    grid-row: 1;
+  }
+
+  .reviews {
+    grid-column: 2;
+    grid-row: 1;
+    margin: 10px auto;
+    font-size: 20px;
+  }
+
+  .reviews ul li {
+    margin: 10px;
+  }
+
+  .reviews h3 {
+    margin-left: 20px;
+  }
+  
+  .upgrades {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(2, 1fr);
+    gap: 5px;
+  }
+
+  footer p {
+    font-size: 20px;
+  }
+  
+  /* LOGIN PAGE */
+
+  .login {
+    border: solid 2px black;
+    margin: 10px auto;
+    max-width: 600px;
+    padding: 10px;
+  }
+
+  .login h1 {
+    text-align: center;
+    color: #4c96d7;
+  }
+
+  .login form {
+    margin: 0 auto;
+  }
+
+  .login input {
+    font-size: 15px;
+    padding: 3px;
+  }
+
+  .loginButton {
+    font-size: 15px;
+  }
+
+  .login a {
+    color: black;
+  }
+
+  /* REGISTRATION PAGE */
+
+  .register {
+    border: solid 2px black;
+    margin: 10px auto;
+    max-width: 600px;
+    padding: 10px;
+  }
+
+  .register h1 {
+    text-align: center;
+    color: #4c96d7;
+  }
+
+  .register form {
+    margin: 0 auto;
+  }
+
+  .register input {
+    display: block;
+    font-size: 15px;
+    padding: 3px;
+  }
+
+  .registerButton {
+    display: block;
+    margin: 10px auto;
+    font-size: 15px;
+  }
+
+  .register a {
+    display:  block;
+    color: black;
+  }
+
+  /* FORGOT PASSWORD PAGE */
+
+  .forgot {
+    border: solid 2px black;
+    margin: 10px auto;
+    max-width: 600px; 
+    padding: 10px;
+  }
+
+  .forgot h1 {
+    text-align: center;
+    color: #4c96d7;
+  }
+
+  .forgot form {
+    margin: 0 auto;
+  }
+
+  .forgot input {
+    display: block;
+    font-size: 15px;
+    padding: 3px;
+  }
+
+  .forgotButton {
+    display: block;
+    margin: 10px auto;
+    font-size: 15px;
+  }
+
+  .forgot a {
+    display:  block;
+    color: black;
+  }
+
+  .forgot p {
+    text-align: center;
+    margin: 0 auto;
+    padding: 10px;
+  }
+
+  /* CLASSIFICATIONS */
+
+  #inv-display{
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+   }
+   
+   #inv-display li{
+    border: 1px #ccc solid;
+    list-style-type: none;
+    flex: 1 1 auto;
+    margin: 0;
+    max-width: 200px;
+		flex: 1 0 auto;
+		text-align: center;
+		height: 250px;
+		display: flex;
+		flex-direction: column;
+		justify-content: space-between;
+   }
+   
+  #inv-display li img {
+    width: fit-content;
+      max-width: 100%;
+      margin: 0 auto;
+  }
+
+	#inv-display {
+		flex-flow: row wrap;
+		justify-content: flex-start;
+	}
+
+	#inv-display h2{
+		font-size: 1rem;
+	}
+      
+	#inv-display div {
+		width: 100%;
+	}
+
+  /* VEHICLE DETAILS PAGE */
+
+  #vehicleInfo-display {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 60px 1fr;
+    margin: 30px;
+    gap: 30px;
+  }
+
+  #vehicleInfo-display h1 {
+    grid-column: 1/3;
+    margin-bottom: 0;
+  }
+
+  #vehicleInfo-display h2 {
+    font-size: 1.5em;
+  }
+
+  #vehicleInfo-display p {
+    font-size: 1.25em;
+  }
+
+  #vehicleInfo-display img {
+    border: solid 4px #4c96d7;
+    grid-column: 1;
+    margin: 0;
+  }
+
+  #vehicleInfo-display section {
+    grid-column: 2;
+    margin: 0;
+    height: 50%;
+  }
+
+  /* IMAGE ADMIN VIEW */
+
+  .imgAdmin {
+    max-width: 600px;
+
+  }
+
+  .imgAdmin h1 {
+    text-align: left;
+    font-size: 2.5em;
+    margin-top: 20px;
+  }
+
+  .imgAdmin h2 {
+    font-size: 1.75em;
+    text-align: left;
+  }
+
+  .imgAdmin p {
+    font-size: 1.1em;
+    text-align: left;
+  }
+
+}
+
+@media all and (min-width: 600px) and (max-width: 1000px) {
+
+  #vehicleInfo-display h2 {
+    font-size: 1.2em;
+  }
+
+  #vehicleInfo-display p {
+    font-size: 1em;
+  }
+}
