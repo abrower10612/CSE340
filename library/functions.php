@@ -193,7 +193,7 @@ function resizeImage($old_image_path, $new_image_path, $max_width, $max_height) 
   break;
   default:
    return;
- } // ends the swith
+ } // ends the switch
  
   // Get the old image and its height and width
   $old_image = $image_from_file($old_image_path);
