@@ -21,7 +21,7 @@
   <div class="buttondiv">
     <button class="buttonLarge">Own Today</button>
   </div>
-  <img src="/phpmotors/images/delorean.jpg" alt="Image of a Delorean car" class="delorean">
+  <img src="/phpmotors/images/vehicles/delorean.jpg" alt="Image of a Delorean car" class="delorean">
   <div class="buttondiv">
     <button class="buttonSmall">Own Today</button>
   </div>

@@ -21,8 +21,8 @@
     }
     ?>
     <?php
-      if (isset($vehicleInfo)) {
-        echo $vehicleInfo;
+      if (isset($buildView)) {
+        echo $buildView;
       }
     ?>
   <?php require $_SERVER['DOCUMENT_ROOT'] . '/phpmotors/snippets/footer.php'; ?>  

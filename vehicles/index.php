@@ -11,6 +11,8 @@ require_once $_SERVER['DOCUMENT_ROOT'] . '/phpmotors/model/main-model.php';
 require_once $_SERVER['DOCUMENT_ROOT'] . '/phpmotors/model/vehicles-model.php';
 // Get the functions library
 require_once $_SERVER['DOCUMENT_ROOT'] . '/phpmotors/library/functions.php';
+// Get the functions library
+require_once $_SERVER['DOCUMENT_ROOT'] . '/phpmotors/model/uploads-model.php';
 
 // call the navList function found in functions.php
 $navList = navList($classifications);
@@ -21,13 +23,16 @@ if ($action == NULL) {
 }
 
 switch ($action) {
+
   case 'addClassification':
     include $_SERVER['DOCUMENT_ROOT'] . '/phpmotors/view/addClassification.php';
-    break;
+  break;
+
 
   case 'addVehicle':
     include $_SERVER['DOCUMENT_ROOT'] . '/phpmotors/view/addVehicle.php';
-    break;
+  break;
+
 
   case 'classificationAdded':
     // Filter and store the data
@@ -53,7 +58,8 @@ switch ($action) {
       include $_SERVER['DOCUMENT_ROOT'] . '/phpmotors/view/vehicleManagement.php';
       exit;
     }
-    break;
+  break;
+
 
   case 'vehicleAdded':
     // Filter and store the data
@@ -89,7 +95,8 @@ switch ($action) {
       header('Location: /phpmotors/vehicles');
       exit;
     }
-    break;
+  break;
+
 
   // Used for starting update & delete process of vehicles by classificationId
   case 'getInventoryItems': 
@@ -99,7 +106,8 @@ switch ($action) {
     $inventoryArray = getInventoryByClassification($classificationId); 
     // Convert the array to a JSON object and send it back 
     echo json_encode($inventoryArray); 
-    break;
+  break;
+
 
   case 'updateVehicle':
     // Filter and store the data
@@ -138,7 +146,8 @@ switch ($action) {
       include $_SERVER['DOCUMENT_ROOT'] . '/phpmotors/view/vehicle-update.php';
       exit;
     }
-    break;
+  break;
+
 
   case 'mod':
     $invId = filter_input(INPUT_GET, 'id', FILTER_VALIDATE_INT);
@@ -148,7 +157,8 @@ switch ($action) {
       $_SESSION['message'] = $message;
     }
     include $_SERVER['DOCUMENT_ROOT'] . '/phpmotors/view/vehicle-update.php';
-    break;
+  break;
+
 
   case 'del':
     $invId = filter_input(INPUT_GET, 'id', FILTER_VALIDATE_INT);
@@ -160,7 +170,8 @@ switch ($action) {
     $_SESSION['message'] = $message;
     include $_SERVER['DOCUMENT_ROOT'] . '/phpmotors/view/vehicle-delete.php';
     exit;
-    break;
+  break;
+
 
   case 'deleteVehicle':
     // Filter and store the data
@@ -183,7 +194,8 @@ switch ($action) {
       header('location: /phpmotors/vehicles/');
       exit;
     }
-    break;
+  break;
+
 
   case 'classification':
     $classificationName = filter_input(INPUT_GET, 'classificationName', FILTER_SANITIZE_STRING); // to filter, sanitize, and store the second value being sent through the URL
@@ -195,23 +207,37 @@ switch ($action) {
     else {
       $vehicleDisplay = buildVehiclesDisplay($vehicles);
     }
-    include $_SERVER['DOCUMENT_ROOT'] . '/phpmotors/view/classification.php'; // deliver either the message or the vehicles belonging to the selected classification from menu
-    break;
+    // deliver either the message or the vehicles belonging to the selected classification from menu
+    include $_SERVER['DOCUMENT_ROOT'] . '/phpmotors/view/classification.php'; 
+  break;
+
 
   case 'getVehicleInfo':
     $invId = filter_input(INPUT_GET, 'invId', FILTER_SANITIZE_NUMBER_INT);
-    if($invId < 1) {
+    
+    // $getVehicleInfo = getInvItemInfo($invId);
+    $vehicleInfo = getVehicleById($invId);
+
+    // $imgPath = getInvItemInfo($invId);
+    $thumbnails = obtainThumbnails($invId);
+
+
+    if($vehicleInfo) {
+      $buildView = vehicleInfo($vehicleInfo, $thumbnails);
+    }
+    else {
       $message = '<p class="notice">Sorry, no vehicle information could be found for your selection</p>';
       $_SESSION['message'] = $message;
     }
-    $getVehicleInfo = getInvItemInfo($invId);
-    $vehicleInfo = vehicleInfo($getVehicleInfo);
+
     include $_SERVER['DOCUMENT_ROOT'] . '/phpmotors/view/vehicle-detail.php';
-    break;
+  break;
+
 
   default:
     $classificationList = buildClassificationList($classifications);
     include $_SERVER['DOCUMENT_ROOT'] . '/phpmotors/view/vehicleManagement.php';
-    break;
+  break;
+
 }
 ?>
