@@ -49,12 +49,14 @@ switch ($action) {
     $imageCheck = checkExistingImage($imgName);
         
     if($imageCheck){
-    $message = '<p class="notice">An image by that name already exists.</p>';
-    } elseif (empty($invId) || empty($imgName)) {
-    $message = '<p class="notice">You must select a vehicle and image file for the vehicle.</p>';
-    } else {
-    // Upload the image, store the returned path to the file
-    $imgPath = uploadFile('file1');
+      $message = '<p class="notice">An image by that name already exists.</p>';
+    } 
+    elseif (empty($invId) || empty($imgName)) {
+      $message = '<p class="notice">You must select a vehicle and image file for the vehicle.</p>';
+    } 
+    else {
+      // Upload the image, store the returned path to the file
+      $imgPath = uploadFile('file1');
         
     // Insert the image information to the database, get the result
     $result = storeImages($imgPath, $invId, $imgName, $imgPrimary);

@@ -513,13 +513,16 @@ justify-content: space-between;
 /* VEHICLE DETAILS PAGE */
 
 #vehicleInfo-display {
-  display: block;
+  display: grid;
+  grid-template-rows: 100px, 1fr, 1fr, 1fr;
+  text-align: center;
   margin: 20px;
 }
 
 #vehicleInfo-display h1 {
   color: #4c96d7;
   text-align: center;
+  grid-row: 1;
 }
 
 #vehicleInfo-display h2 {
@@ -532,12 +535,34 @@ justify-content: space-between;
   margin: 0 0 20px 0;
 }
 
-
-#vehicleInfo-display img {
+#primaryImg {
   display: block;
+  grid-row: 2;
   margin: 0 auto;
   width: 100%;
   border: solid 2px #4c96d7;
+}
+
+.vehicleInfo {
+  grid-row: 3;
+}
+
+.thumbnailImg {
+  display: flex;
+  flex-direction: column;
+  grid-row: 4;
+}
+
+.thumbnailImg > * {
+  border: solid 2px #4c96d7;
+  margin: 10px auto;
+  width: 50%;
+}
+
+.thumbnailImg h2 {
+  border: none;
+  font-size: 1.65rem !important;
+  width: unset;
 }
 
 /* IMAGE ADMIN VIEW */

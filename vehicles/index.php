@@ -198,8 +198,10 @@ switch ($action) {
 
 
   case 'classification':
-    $classificationName = filter_input(INPUT_GET, 'classificationName', FILTER_SANITIZE_STRING); // to filter, sanitize, and store the second value being sent through the URL
-    $vehicles = getVehiclesByClassification($classificationName); // variable for storing the array of vehicles that is returned from the vehicles model.
+    // to filter, sanitize, and store the second value being sent through the URL
+    $classificationName = filter_input(INPUT_GET, 'classificationName', FILTER_SANITIZE_STRING); 
+    // variable for storing the array of vehicles that is returned from the vehicles model.
+    $vehicles = getVehiclesByClassification($classificationName); 
     if(!count($vehicles)) {
       $message = '<p class="notice">Sorry, no ' . $classificationName . ' vehicles could be found.</p>';
       $_SESSION['message'] = $message;

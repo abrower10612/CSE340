@@ -76,20 +76,20 @@ function buildClassificationList($classifications){
 
 
   function vehicleInfo($vehicleInfo, $thumbnails) {
-    // var_dump($vehicleInfo);
-    // echo '<br><br>';
-    // var_dump($thumbnails);
     $vi = '<div id="vehicleInfo-display">';
     $vi .= '<h1>' 
       . $vehicleInfo['invMake'] 
       . ' ' 
       . $vehicleInfo['invModel'] 
       . '</h1>';
-    $vi .= "<img src='$vehicleInfo[imgPath]' alt='Image of $vehicleInfo[invMake] $vehicleInfo[invModel] on phpmotors.com'>";
+    $vi .= "<img src='$vehicleInfo[imgPath]' id='primaryImg' alt='Image of $vehicleInfo[invMake] $vehicleInfo[invModel] on phpmotors.com'>";
+    $vi .= "<section class='thumbnailImg'>";
+    $vi .= '<h2>More images:</h2>';
     foreach($thumbnails as $thumbnail) {
       $vi .= "<img src='$thumbnail[imgPath]' alt='Image of $vehicleInfo[invMake] $vehicleInfo[invModel] on phpmotors.com'>";
     }
-    $vi .= "<section>";
+    $vi .= "</section>";
+    $vi .= "<section class='vehicleInfo'>";
     $vi .= "<h2>Price: $" 
       . number_format($vehicleInfo['invPrice'], 2) 
       . "<h2>";

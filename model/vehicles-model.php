@@ -4,8 +4,7 @@
 
 
 // this function handles the adding of a vehicle to the inventory 
-function newVehicle($invMake, $invModel, $invDescription, $invImage, $invThumbnail, $invPrice, $invStock, $invColor, $classificationId)
-{
+function newVehicle($invMake, $invModel, $invDescription, $invImage, $invThumbnail, $invPrice, $invStock, $invColor, $classificationId) {
   // Create a connection object using the phpmotors connection function
   $db = phpmotorsConnect();
   // The SQL statement
@@ -74,7 +73,8 @@ function getInventoryByClassification($classificationId){
  }
 
 
-// Get vehicle information by invId
+
+ // Get vehicle information by invId
 function getInvItemInfo($invId){
   $db = phpmotorsConnect();
   $sql = 'SELECT * FROM inventory WHERE invId = :invId';

@@ -341,6 +341,10 @@
     height: 50%;
   }
 
+  .thumbnailImg h2 {
+    display: none;
+  }
+
   /* IMAGE ADMIN VIEW */
 
   .imgAdmin {

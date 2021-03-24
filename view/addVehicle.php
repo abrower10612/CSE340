@@ -51,9 +51,9 @@ if($_SESSION['clientData']['clientLevel'] < 2)
 
         <label for="invDescription">Description* <input type="text" name="invDescription" id="invDescription" <?php if (isset($invDescription)) {echo "value='$invDescription'";} ?> required></label>
 
-        <label for="invImage">Image*<input type="text" name="invImage" id="invImage" value="/phpmotors/images/no-image.png" <?php if (isset($invImage)) {echo "value='$invImage'";} ?> required></label>
+        <label for="invImage">Image*<input type="text" name="invImage" id="invImage" value="/phpmotors/images/vehicles/no-image.png" <?php if (isset($invImage)) {echo "value='$invImage'";} ?> required></label>
 
-        <label for="invThumbnail">Thumbnail*<input type="text" name="invThumbnail" id="invThumbnail" value="/phpmotors/images/no-image.png" <?php if (isset($invThumbnail)) {echo "value='$invThumbnail'";} ?> required></label>
+        <label for="invThumbnail">Thumbnail*<input type="text" name="invThumbnail" id="invThumbnail" value="/phpmotors/images/vehicles/no-image-tn.png" <?php if (isset($invThumbnail)) {echo "value='$invThumbnail'";} ?> required></label>
 
         <label for="invPrice">Price*<input type="number" name="invPrice" id="invPrice" <?php if (isset($invPrice)) {echo "value='$invPrice'";} ?> required></label>
 

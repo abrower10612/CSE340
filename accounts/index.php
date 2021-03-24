@@ -151,8 +151,6 @@ switch ($action) {
 
     // checking for an existing email address
     $existingEmail = checkExistingEmail($clientEmail);
-    // var_dump($existingEmail);
-    // exit;
 
     // if email already exists, provide message telling user
     if ($_SESSION['clientData']['clientEmail'] !== $clientEmail) {
