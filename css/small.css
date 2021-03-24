@@ -514,7 +514,7 @@ justify-content: space-between;
 
 #vehicleInfo-display {
   display: grid;
-  grid-template-rows: 100px, 1fr, 1fr, 1fr;
+  grid-template-rows: 100px 1fr 1fr 1fr;
   text-align: center;
   margin: 20px;
 }
@@ -540,6 +540,7 @@ justify-content: space-between;
   grid-row: 2;
   margin: 0 auto;
   width: 100%;
+  max-width: 500px;
   border: solid 2px #4c96d7;
 }
 
@@ -557,6 +558,10 @@ justify-content: space-between;
   border: solid 2px #4c96d7;
   margin: 10px auto;
   width: 50%;
+}
+
+.thumbnailImg img {
+  max-width: 200px;
 }
 
 .thumbnailImg h2 {

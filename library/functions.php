@@ -92,7 +92,7 @@ function buildClassificationList($classifications){
     $vi .= "<section class='vehicleInfo'>";
     $vi .= "<h2>Price: $" 
       . number_format($vehicleInfo['invPrice'], 2) 
-      . "<h2>";
+      . "</h2>";
     $vi .= "<h2>Description:</h2>";
     $vi .= "<p>$vehicleInfo[invDescription]</p>";
     $vi .= "<h2>Color:</h2>";

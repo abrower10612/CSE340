@@ -9,7 +9,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Yusei+Magic&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="/phpmotors/css/small.css?v=<?php echo time(); ?>">
   <link rel="stylesheet" href="/phpmotors/css/large.css?v=<?php echo time(); ?>">
-  <title><?php echo $getVehicleInfo['invMake'] . " " . $getVehicleInfo['invModel'] ?> | PHP Motors</title>
+  <title><?php echo $vehicleInfo['invMake'] . " " . $vehicleInfo['invModel'] ?> | PHP Motors</title>
 </head>
 <body>
   <?php require $_SERVER['DOCUMENT_ROOT'] . '/phpmotors/snippets/header.php'; ?>
