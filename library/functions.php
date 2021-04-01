@@ -126,8 +126,7 @@ function buildClassificationList($classifications){
   . $_SESSION['clientData']['clientId']
   . '">'
   . '</fieldset>'
-  . '</form>'
-  . '<p>Be the first to write a review</p>';
+  . '</form>';
   return $rs;
  }
 

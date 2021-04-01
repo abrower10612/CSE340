@@ -31,21 +31,19 @@ switch ($action) {
     $reviewText = filter_input(INPUT_POST, 'review', FILTER_SANITIZE_STRING);
     $invId = filter_input(INPUT_POST, 'invId', FILTER_SANITIZE_NUMBER_INT);
     $clientId = filter_input(INPUT_POST, 'clientId', FILTER_SANITIZE_NUMBER_INT);
-    // var_dump($invId);
-    // echo '<br>';
-    // var_dump($clientId);
-    // exit;
 
     if (empty($reviewText)) {
       $_SESSION['message'] = '<p class="message">Please provide all of the required information for the vehicle you would like to add.</p>';
       include $_SERVER['DOCUMENT_ROOT'] . '/phpmotors/view/vehicle-detail.php';
       exit;
-    };
+    }
 
     $reviewOutcome = insertReview($reviewText, $invId, $clientId);
 
-    include $_SERVER['DOCUMENT_ROOT'] . '/phpmotors/view/vehicle-detail.php';
+    header('location: /phpmotors/vehicles?action=getVehicleInfo&invId=' . $invId);
+    
     break;
+
 
   // deliver a view to edit a review
   case 'editReview':
@@ -69,6 +67,7 @@ switch ($action) {
 
   default:
     include $_SERVER['DOCUMENT_ROOT'] . '/phpmotors/view/admin.php';
+    break;
 }
 
 ?>

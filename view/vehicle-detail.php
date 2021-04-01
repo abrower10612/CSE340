@@ -34,6 +34,23 @@
         else {
           echo '<p>You must <a href="/phpmotors/accounts/index.php?action=login">login</a> to write a review';
         }
+
+        if (!$vehicleReviews) {
+          echo '<p>Be the first to write a review</p>';
+        }
+        else {
+          foreach ($vehicleReviews as $review) {
+            echo '<section id="reviews">';
+            echo '<p>On '
+            . substr($review['reviewDate'], 0, 10)
+            . ', '
+            . substr($review['clientFirstname'], 0, 1)
+            . substr($review['clientLastname'], 0)
+            . ' wrote: <br>'
+            . $review['reviewText']
+            . '<hr>';
+          }
+        }
     ?>
     </section>
   <?php require $_SERVER['DOCUMENT_ROOT'] . '/phpmotors/snippets/footer.php'; ?>  

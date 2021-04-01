@@ -15,8 +15,9 @@ require_once $_SERVER['DOCUMENT_ROOT'] . '/phpmotors/library/functions.php';
 require_once $_SERVER['DOCUMENT_ROOT'] . '/phpmotors/model/uploads-model.php';
 // Get the accounts model
 require_once $_SERVER['DOCUMENT_ROOT'] . '/phpmotors/model/accounts-model.php';
-// Get the accounts model
+// Get the reviews model
 require_once $_SERVER['DOCUMENT_ROOT'] . '/phpmotors/model/reviews-model.php';
+
 
 // call the navList function found in functions.php
 $navList = navList($classifications);
@@ -240,11 +241,9 @@ switch ($action) {
       $message = '<p class="notice">Sorry, no vehicle information could be found for your selection</p>';
       $_SESSION['message'] = $message;
     }
-    // this is where I left off on 3/29 @ 8pm
-    // $classificationName = filter_input(INPUT_GET, 'classificationName', FILTER_SANITIZE_STRING); 
-    $vehicleReviews = getVehicleReviews($invId); 
-    // var_dump($vehicleReviews);
-    // exit;
+
+    $vehicleReviews = getVehicleReviews($invId);
+    
     include $_SERVER['DOCUMENT_ROOT'] . '/phpmotors/view/vehicle-detail.php';
     break;
 

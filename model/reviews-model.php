@@ -3,7 +3,6 @@
 // REVIEWS MODEL
 
 //insert a review 
-// UPDATE ME
 function insertReview($reviewText, $invId, $clientId) {
   $db = phpmotorsConnect(); 
   $sql = ' INSERT INTO reviews (reviewText, invId, clientId) VALUES (:reviewText, :invId, :clientId)';
@@ -19,10 +18,9 @@ function insertReview($reviewText, $invId, $clientId) {
 
 
 // get reviews for a specific inventory item 
-// UPDATE ME - IN PROGRESS
 function getVehicleReviews($invId) {
   $db = phpmotorsConnect(); 
-  $sql = ' SELECT * FROM reviews WHERE reviewId = invId';
+  $sql = ' SELECT * FROM reviews JOIN clients WHERE invId = :invId AND reviews.clientId = clients.clientId';
   $stmt = $db->prepare($sql); 
   $stmt->bindValue(':invId', $invId, PDO::PARAM_INT); 
   $stmt->execute(); 
