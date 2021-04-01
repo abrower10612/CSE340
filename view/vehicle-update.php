@@ -1,6 +1,6 @@
 <?php 
   if($_SESSION['clientData']['clientLevel'] < 2)
-  header('Location: /phpmotors/index.php');
+    header('Location: /phpmotors/index.php');
 
   //build the select list
   $classificationList = '<label for="classificationId">Classification*<br>' 

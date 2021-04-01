@@ -319,6 +319,11 @@
   #vehicleInfo-display h1 {
     grid-column: 1/4;
     margin-bottom: 0;
+    padding-bottom: 0;
+  }
+
+  #reviewMessage {
+    grid-column: 1/4;
   }
 
   #vehicleInfo-display h2 {
@@ -368,6 +373,58 @@
     -ms-transform: scale(1.5); /* IE 9 */
     -webkit-transform: scale(1.5); /* Safari 3-8 */
     transform: scale(1.5); 
+  }
+
+  .reviewsContainer {
+    padding: 0 20px;
+  }
+
+  .reviewsContainer h2,
+  .reviewsContainer h3 {
+    color: #4c96d7;
+  }
+
+  .reviewsContainer fieldset {
+    border: solid 3px black;
+    margin-bottom: 20px;
+  }
+
+  .reviewsContainer h2 {
+    font-size: 2rem;
+  }
+  
+  .reviewsContainer h3 {
+    font-size: 1.5rem;
+  }
+
+  .reviewsContainer label {
+    font-size: 1.25rem;
+  }
+
+  .reviewsContainer input{
+    margin-bottom: 15px;
+    font-size: 1.25rem;
+    padding: 3px;
+  }
+
+  .reviewsContainer textarea {
+    margin-bottom: 15px;
+    font-size: 1.5rem;
+    padding: 3px;
+  }
+
+  .reviewsContainer p {
+    font-size: 1.25rem;
+  }
+
+  #submitReview {
+    cursor: pointer;
+    border: solid 2px black;
+    background-color: #4c96d7;
+    color: #FFFFFF;
+    padding: 5px;
+    margin-left: 20px;
+    font-size: 1.25rem;
   }
 
   /* IMAGE ADMIN VIEW */

@@ -2,8 +2,20 @@
 
 // REVIEWS CONTROLLER
 
+// Get the database connection file
+require_once $_SERVER['DOCUMENT_ROOT'] . '/phpmotors/library/connections.php';
+// Get the PHP Motors model for use as needed
+require_once $_SERVER['DOCUMENT_ROOT'] . '/phpmotors/model/main-model.php';
+// Get the functions library
+require_once $_SERVER['DOCUMENT_ROOT'] . '/phpmotors/library/functions.php';
 // get the reviews-model
 require_once $_SERVER['DOCUMENT_ROOT'] . '/phpmotors/model/reviews-model.php';
+// get the vehicles-model
+require_once $_SERVER['DOCUMENT_ROOT'] . '/phpmotors/model/vehicles-model.php';
+
+
+// create or access a session
+session_start();
 
 $navList = navList($classifications);
 
@@ -15,7 +27,24 @@ if ($action == NULL) {
 switch ($action) {
   // add a new review
   case 'addReview':
-    include $_SERVER['DOCUMENT_ROOT'] . '/phpmotors/view/template.php';
+    $screenName = filter_input(INPUT_POST, 'screenName', FILTER_SANITIZE_STRING);
+    $reviewText = filter_input(INPUT_POST, 'review', FILTER_SANITIZE_STRING);
+    $invId = filter_input(INPUT_POST, 'invId', FILTER_SANITIZE_NUMBER_INT);
+    $clientId = filter_input(INPUT_POST, 'clientId', FILTER_SANITIZE_NUMBER_INT);
+    // var_dump($invId);
+    // echo '<br>';
+    // var_dump($clientId);
+    // exit;
+
+    if (empty($reviewText)) {
+      $_SESSION['message'] = '<p class="message">Please provide all of the required information for the vehicle you would like to add.</p>';
+      include $_SERVER['DOCUMENT_ROOT'] . '/phpmotors/view/vehicle-detail.php';
+      exit;
+    };
+
+    $reviewOutcome = insertReview($reviewText, $invId, $clientId);
+
+    include $_SERVER['DOCUMENT_ROOT'] . '/phpmotors/view/vehicle-detail.php';
     break;
 
   // deliver a view to edit a review

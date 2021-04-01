@@ -25,6 +25,17 @@
         echo $buildView;
       }
     ?>
+    <section class="reviewsContainer">
+    <h2>Customer Reviews</h2>
+    <?php
+        if (isset($_SESSION['loggedin'])) {
+          echo $reviewSection;
+        }
+        else {
+          echo '<p>You must <a href="/phpmotors/accounts/index.php?action=login">login</a> to write a review';
+        }
+    ?>
+    </section>
   <?php require $_SERVER['DOCUMENT_ROOT'] . '/phpmotors/snippets/footer.php'; ?>  
 </body>
 </html>

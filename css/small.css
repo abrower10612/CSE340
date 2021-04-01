@@ -570,6 +570,10 @@ justify-content: space-between;
   width: unset;
 }
 
+.reviewsContainer {
+  border-top: solid 5px black;
+}
+
 /* IMAGE ADMIN VIEW */
 
 .imgAdmin {

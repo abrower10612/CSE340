@@ -5,14 +5,18 @@ session_start();
 
 // Get the database connection file
 require_once $_SERVER['DOCUMENT_ROOT'] . '/phpmotors/library/connections.php';
-// Get the PHP Motors model for use as needed
+// Get the PHP Motors model 
 require_once $_SERVER['DOCUMENT_ROOT'] . '/phpmotors/model/main-model.php';
-// Get the vehicle model for use as needed
+// Get the vehicle model
 require_once $_SERVER['DOCUMENT_ROOT'] . '/phpmotors/model/vehicles-model.php';
 // Get the functions library
 require_once $_SERVER['DOCUMENT_ROOT'] . '/phpmotors/library/functions.php';
-// Get the functions library
+// Get the uploads model
 require_once $_SERVER['DOCUMENT_ROOT'] . '/phpmotors/model/uploads-model.php';
+// Get the accounts model
+require_once $_SERVER['DOCUMENT_ROOT'] . '/phpmotors/model/accounts-model.php';
+// Get the accounts model
+require_once $_SERVER['DOCUMENT_ROOT'] . '/phpmotors/model/reviews-model.php';
 
 // call the navList function found in functions.php
 $navList = navList($classifications);
@@ -72,7 +76,7 @@ switch ($action) {
     $invStock = filter_input(INPUT_POST, 'invStock', FILTER_SANITIZE_NUMBER_FLOAT, FILTER_FLAG_ALLOW_FRACTION);
     $invColor = filter_input(INPUT_POST, 'invColor', FILTER_SANITIZE_STRING);
     $classificationId = filter_input(INPUT_POST, 'classificationId', FILTER_SANITIZE_NUMBER_INT);
-
+    
     // Check for missing data
     if (empty($invMake) || empty($invModel) || empty($invDescription) || empty($invImage) || empty($invThumbnail) || empty($invPrice) || empty($invStock) || empty($invColor) || empty($classificationId)) {
       $_SESSION['message'] = '<p class="message">Please provide all of the required information for the vehicle you would like to add.</p>';
@@ -211,7 +215,7 @@ switch ($action) {
     }
     // deliver either the message or the vehicles belonging to the selected classification from menu
     include $_SERVER['DOCUMENT_ROOT'] . '/phpmotors/view/classification.php'; 
-  break;
+    break;
 
 
   case 'getVehicleInfo':
@@ -226,20 +230,28 @@ switch ($action) {
 
     if($vehicleInfo) {
       $buildView = vehicleInfo($vehicleInfo, $thumbnails);
+      if(isset($_SESSION['loggedin'])) {
+        $clientEmail = $_SESSION['clientData']['clientEmail'];
+        $clientInfo = getClient($clientEmail);
+        $reviewSection = reviewSection($vehicleInfo);
+      }
     }
     else {
       $message = '<p class="notice">Sorry, no vehicle information could be found for your selection</p>';
       $_SESSION['message'] = $message;
     }
-
+    // this is where I left off on 3/29 @ 8pm
+    // $classificationName = filter_input(INPUT_GET, 'classificationName', FILTER_SANITIZE_STRING); 
+    $vehicleReviews = getVehicleReviews($invId); 
+    // var_dump($vehicleReviews);
+    // exit;
     include $_SERVER['DOCUMENT_ROOT'] . '/phpmotors/view/vehicle-detail.php';
-  break;
+    break;
 
 
   default:
     $classificationList = buildClassificationList($classifications);
     include $_SERVER['DOCUMENT_ROOT'] . '/phpmotors/view/vehicleManagement.php';
-  break;
-
+    break;
 }
 ?>
