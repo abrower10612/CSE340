@@ -60,27 +60,33 @@
     <a href="/phpmotors/accounts/index.php?action=accountMod">Update Account Information</a>
 
     <h2>Review Management</h2>
-    <p>Update or delete a review:</p>
 
     <?php
       $clientReviews = getClientReviews($_SESSION['clientData']['clientId']);
-      foreach ($clientReviews as $review) {
-        echo '<p>'
-        . '<a href="/phpmotors/reviews/index.php?action=editReview&reviewId='
-        . $review['reviewId']
-        . '">Edit</a>'
-        . ' '
-        . '<a href="/phpmotors/reviews/index.php?action=deleteReview&reviewId='
-        . $review['reviewId']
-        . '">Delete</a>'
-        . ' '
-        . date('m/d/y', strtotime($review['reviewDate']))
-        . ' '
-        . $review['invMake']
-        . ' '
-        . $review['invModel']
-        . '</p>';
+      if (!$clientReviews) {
+        echo '<p>You haven\'t reviewed any vehicles yet!</p>';
       }
+      else {
+        echo '<p>Update or delete a review:</p>';
+        foreach ($clientReviews as $review) {
+          echo '<p>'
+          . '<a href="/phpmotors/reviews/index.php?action=editReview&reviewId='
+          . $review['reviewId']
+          . '">Edit</a>'
+          . ' '
+          . '<a href="/phpmotors/reviews/index.php?action=deleteReview&reviewId='
+          . $review['reviewId']
+          . '">Delete</a>'
+          . ' '
+          . date('m/d/y', strtotime($review['reviewDate']))
+          . ' '
+          . $review['invMake']
+          . ' '
+          . $review['invModel']
+          . '</p>';
+        }
+      }
+
     ?>
 
     <?php
@@ -94,3 +100,4 @@
   <?php require $_SERVER['DOCUMENT_ROOT'] . '/phpmotors/snippets/footer.php'; ?>  
 </body>
 </html>
+<?php unset($_SESSION['message']); ?>

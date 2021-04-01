@@ -167,7 +167,7 @@ switch ($action) {
 
     // Check for missing data
     if (empty($clientFirstname) || empty($clientLastname) || empty($clientEmail)) {
-      $message = '<p class="message">Please fill in missing required input with the proper format.</p>';
+      $message = '<p class="message" id="redMessage">Please fill in missing required input with the proper format.</p>';
       $_SESSION['message'] = $message;
       include $_SERVER['DOCUMENT_ROOT'] . '/phpmotors/view/client-update.php';
       exit;
@@ -182,12 +182,12 @@ switch ($action) {
 
     // // Check and report the result
     if ($updateResult) {
-      $message = '<p class="message"> Account successfully updated.</p>';
+      $message = '<p class="message" id="greenMessage"> Account successfully updated.</p>';
       $_SESSION['message'] = $message;
       header('location: /phpmotors/accounts/');
       exit;
     } else {
-      $message = '<p class="message">Account update failed. Please make a change to one of the following fields.</p>';
+      $message = '<p class="message" id="redMessage">Account update failed. Please make a change to one of the following fields.</p>';
       $_SESSION['message'] = $message;
       include $_SERVER['DOCUMENT_ROOT'] . '/phpmotors/view/client-update.php';
       exit;
@@ -201,7 +201,7 @@ switch ($action) {
     $checkPassword = checkPassword($clientPassword);
     
     if ($checkPassword === 0) {
-      $message = '<p class="message">Invalid password. Please make sure your new password meets all the requirements.</p>';
+      $message = '<p class="message" id="redMessage">Invalid password. Please make sure your new password meets all the requirements.</p>';
       $_SESSION['message'] = $message;
       include $_SERVER['DOCUMENT_ROOT'] . '/phpmotors/view/client-update.php';
       exit;
@@ -209,7 +209,7 @@ switch ($action) {
 
     // Check for missing data
     if (empty($checkPassword)) {
-      $_SESSION['message'] = '<p>Please enter a new password.</p>';
+      $_SESSION['message'] = '<p id="redMessage">Please enter a new password.</p>';
       include $_SERVER['DOCUMENT_ROOT'] . '/phpmotors/view/registration.php';
       exit;
     }

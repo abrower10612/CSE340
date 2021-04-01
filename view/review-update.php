@@ -64,7 +64,7 @@
 
         <input type="submit" class="addButton" id="addButton"  name="submit" value="Update Review">
         <input type="hidden" name="action" value="reviewEdited">
-        <input type="hidden" name="invId" value="<?php if(isset($invInfo['invId'])){ echo $invInfo['invId'];} elseif(isset($invId)){ echo $invId; } ?>">
+        <input type="hidden" name="reviewId" value="<?php if(isset($specificReview['reviewId'])){ echo $specificReview['reviewId'];} elseif(isset($reviewId)){ echo $reviewId; } ?>">
 
       </fieldset>
     </form>
@@ -74,3 +74,4 @@
 </body>
 
 </html>
+<?php unset($_SESSION['message']); ?>

@@ -146,9 +146,6 @@ function deleteVehicle($invId)
 
 // this function is used to query the database for all cars in the classification selected in the menu on phpmotors site
 function getVehiclesByClassification($classificationName){
-  // the following lines basically select all from inventory table 
-  // where class id matches class id in carclassification table where name equals the class name provided
-  // it then returns an array of vehicles in that classification
   $db = phpmotorsConnect();
   $sql =  'SELECT * FROM inventory inv JOIN images img ON inv.invId = img.invId WHERE inv.classificationId IN (SELECT class.classificationId FROM carclassification class WHERE class.classificationName = :classificationName) AND img.imgPath NOT LIKE "%-tn%" AND imgPrimary = 1';
   $stmt = $db->prepare($sql);

@@ -45,6 +45,16 @@ body {
   font-family: "Yusei Magic", sans-serif;
 }
 
+#greenMessage {
+  color: green;
+  margin-left: 10px;
+}
+
+#redMessage {
+  color:red;
+  margin-left: 10px;
+}
+
 .myAccount {
   color: black;
   display: block;

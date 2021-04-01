@@ -14,9 +14,10 @@ require_once $_SERVER['DOCUMENT_ROOT'] . '/phpmotors/model/vehicles-model.php';
 require_once $_SERVER['DOCUMENT_ROOT'] . '/phpmotors/model/reviews-model.php';
 
 
-
-// create or access a session
-session_start();
+if (!isset($_SESSION)) {
+  // create or access a session
+  session_start();
+}
 
 $navList = navList($classifications);
 
@@ -48,7 +49,6 @@ switch ($action) {
 
   // deliver a view to edit a review
   case 'editReview':
-
     $reviewId = filter_input(INPUT_GET, 'reviewId', FILTER_SANITIZE_NUMBER_INT);
 
     $specificReview = getSpecificReview($reviewId);
@@ -58,17 +58,57 @@ switch ($action) {
 
   // handle the review update
   case 'reviewEdited':
-    include $_SERVER['DOCUMENT_ROOT'] . '/phpmotors/accounts/index.php';
+    $reviewText = filter_input(INPUT_POST, 'reviewText', FILTER_SANITIZE_STRING);
+    $reviewId = filter_input(INPUT_POST, 'reviewId', FILTER_SANITIZE_NUMBER_INT);
+
+    $specificReview = getSpecificReview($reviewId);
+    if (empty($reviewText)) {
+      $message = '<p class="message" id="redMessage">The review cannot be left blank. Please fill in the review before submitting.</p>';
+      $_SESSION['message'] = $message;
+      include $_SERVER['DOCUMENT_ROOT'] . '/phpmotors/view/review-update.php';
+      exit;
+    }
+
+    $reviewUpdateResult = updateReview($reviewText, $reviewId);
+
+    if (!$reviewUpdateResult) {
+      $message = '<p class="message" id="redMessage">Review update failed. Please try again.</p>';
+      $_SESSION['message'] = $message;
+    }
+    $message = '<p class="message" id="greenMessage">Your review has been successfully updated.</p>';
+    $_SESSION['message'] = $message;
+
+    header('Location: /phpmotors/reviews/index.php');
     break;
 
   // deliver a view to confirm deletion of a review
   case 'deleteReview':
+    $reviewId = filter_input(INPUT_GET, 'reviewId', FILTER_SANITIZE_NUMBER_INT);
+
+    $message = '<p id="redMessage">Are you sure you want to delete this review?</p>';
+    $_SESSION['message'] = $message;
+
+    $specificReview = getSpecificReview($reviewId);
+
     include $_SERVER['DOCUMENT_ROOT'] . '/phpmotors/view/review-delete.php';
     break;
 
   // handle the review deletion
   case 'reviewDeleted':
-    include $_SERVER['DOCUMENT_ROOT'] . '/phpmotors/view/template.php';
+    $reviewId = filter_input(INPUT_POST, 'reviewId', FILTER_SANITIZE_NUMBER_INT);
+
+    $deleteUpdateResult = deleteReview($reviewId);
+
+    if (!$deleteUpdateResult) {
+      $message = '<p class="message" id="redMessage">Review couldn\'t be deleted. Please try again.</p>';
+      $_SESSION['message'] = $message;
+      header('Location: /phpmotors/reviews/index.php');
+      exit;
+    }
+    $message = '<p class="message" id="greenMessage">Your review has been successfully deleted.</p>';
+    $_SESSION['message'] = $message;
+    
+    header('Location: /phpmotors/reviews/index.php');
     break;
 
   default:

@@ -45,7 +45,7 @@ switch ($action) {
 
     // Check for missing data
     if (empty($classificationName)) {
-      $message = '<p  class="message">Please provide all of the required information for the classification you would like to add.</p>';
+      $message = '<p  class="message" id="redMessage">Please provide all of the required information for the classification you would like to add.</p>';
       include $_SERVER['DOCUMENT_ROOT'] . '/phpmotors/view/addClassification.php';
       exit;
     }
@@ -55,7 +55,7 @@ switch ($action) {
 
     // Check and report the result
     if ($invOutcome === 1) {
-      $message = "<p class='message'>Classification was successfully added.</p>";
+      $message = "<p class='message' id='greenMessage'>Classification was successfully added.</p>";
       header('Location: /phpmotors/vehicles/index.php');
       exit;
     } else {
@@ -90,12 +90,12 @@ switch ($action) {
 
     // Check and report the result
     if ($invOutcome === 1) {
-      $message = '<p class="message">' . $invMake . ' ' . $invModel . ' successfully added.</p>';
+      $message = '<p class="message" id="greenMessage">' . $invMake . ' ' . $invModel . ' successfully added.</p>';
       $_SESSION['message'] = $message;
       header('Location: /phpmotors/vehicles');
       exit;
     } else {
-      $message = "<p class='message'>Vehicle addition failed. Please try again.</p>";
+      $message = "<p class='message' id='redMessage'>Vehicle addition failed. Please try again.</p>";
       $_SESSION['message'] = $message;
       header('Location: /phpmotors/vehicles');
       exit;
@@ -129,7 +129,7 @@ switch ($action) {
 
     // Check for missing data
     if (empty($invMake) || empty($invModel) || empty($invDescription) || empty($invImage) || empty($invThumbnail) || empty($invPrice) || empty($invStock) || empty($invColor) || empty($classificationId)) {
-      $message = '<p class="message">Please complete all information for the vehicle! Double check the classification of the item.</p>';
+      $message = '<p class="message" id="redMessage">Please complete all information for the vehicle! Double check the classification of the item.</p>';
       $_SESSION['message'] = $message;
       include $_SERVER['DOCUMENT_ROOT'] . '/phpmotors/view/addVehicle.php';
       exit;
@@ -140,13 +140,13 @@ switch ($action) {
 
     // Check and report the result
     if ($updateResult) {
-      $message = '<p class="message">' . $invMake . ' ' . $invModel . ' successfully updated.</p>';
+      $message = '<p class="message" id="greenMessage">' . $invMake . ' ' . $invModel . ' successfully updated.</p>';
       $_SESSION['message'] = $message;
       header('location: /phpmotors/vehicles/');
       exit;
     } 
     else {
-      $message = '<p class="message">Vehicle update failed. Please try again.</p>';
+      $message = '<p class="message" id="redMessage">Vehicle update failed. Please try again.</p>';
       $_SESSION['message'] = $message;
       include $_SERVER['DOCUMENT_ROOT'] . '/phpmotors/view/vehicle-update.php';
       exit;
@@ -158,7 +158,7 @@ switch ($action) {
     $invId = filter_input(INPUT_GET, 'id', FILTER_VALIDATE_INT);
     $invInfo = getInvItemInfo($invId);
     if(count($invInfo) < 1) {
-      $message = '<p class="message">Sorry, no vehicle information could be found</p>';
+      $message = '<p class="message" id="redMessage">Sorry, no vehicle information could be found</p>';
       $_SESSION['message'] = $message;
     }
     include $_SERVER['DOCUMENT_ROOT'] . '/phpmotors/view/vehicle-update.php';
@@ -169,9 +169,9 @@ switch ($action) {
     $invId = filter_input(INPUT_GET, 'id', FILTER_VALIDATE_INT);
     $invInfo = getInvItemInfo($invId);
     if(count($invInfo) < 1) {
-      $message = '<p class="message">Sorry, no vehicle information could be found</p>';
+      $message = '<p class="message" id="redMessage">Sorry, no vehicle information could be found</p>';
     }
-    $message = '<p class="message">This action is permanent. Are you sure you want to delete this ' . $invInfo['invMake'] . ' ' . $invInfo['invModel'] .'?</p>';
+    $message = '<p class="message" id="redMessage">This action is permanent. Are you sure you want to delete this ' . $invInfo['invMake'] . ' ' . $invInfo['invModel'] .'?</p>';
     $_SESSION['message'] = $message;
     include $_SERVER['DOCUMENT_ROOT'] . '/phpmotors/view/vehicle-delete.php';
     exit;
@@ -189,12 +189,12 @@ switch ($action) {
 
     // Check and report the result
     if ($deleteResult) {
-      $message = '<p class="message">' . $invMake . ' ' . $invModel . ' successfully deleted.</p>';
+      $message = '<p class="message" id="greenMessage">' . $invMake . ' ' . $invModel . ' successfully deleted.</p>';
       $_SESSION['message'] = $message;
       header('location: /phpmotors/vehicles/');
       exit;
     } else {
-      $message = '<p class="message">' . $invMake . ' ' . $invModel . ' failed to be deleted. Please try again. </p>';
+      $message = '<p class="message" id="redMessage">' . $invMake . ' ' . $invModel . ' failed to be deleted. Please try again. </p>';
       $_SESSION['message'] = $message;
       header('location: /phpmotors/vehicles/');
       exit;
@@ -208,7 +208,7 @@ switch ($action) {
     // variable for storing the array of vehicles that is returned from the vehicles model.
     $vehicles = getVehiclesByClassification($classificationName); 
     if(!count($vehicles)) {
-      $message = '<p class="notice">Sorry, no ' . $classificationName . ' vehicles could be found.</p>';
+      $message = '<p class="notice" id="redMessage">Sorry, no ' . $classificationName . ' vehicles could be found.</p>';
       $_SESSION['message'] = $message;
     }
     else {
@@ -238,7 +238,7 @@ switch ($action) {
       }
     }
     else {
-      $message = '<p class="notice">Sorry, no vehicle information could be found for your selection</p>';
+      $message = '<p class="notice" id="redMessage">Sorry, no vehicle information could be found for your selection</p>';
       $_SESSION['message'] = $message;
     }
 

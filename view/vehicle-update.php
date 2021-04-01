@@ -62,6 +62,7 @@
     <?php
     if (isset($message)) {
       echo $message;
+      unset($_SESSION['message']); 
     }
     ?>
     <form method="post" action="/phpmotors/vehicles/index.php" id="addVehicleForm">

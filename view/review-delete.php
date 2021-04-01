@@ -1,13 +1,6 @@
-<?php
-if($_SESSION['clientData']['clientLevel'] < 2) {
-  header('Location: /phpmotors/index.php');
-  exit;
-}
-if (isset($_SESSION['message'])) {
-  $message = $_SESSION['message'];
-}
-?><!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -16,45 +9,60 @@ if (isset($_SESSION['message'])) {
   <link href="https://fonts.googleapis.com/css2?family=Yusei+Magic&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="/phpmotors/css/small.css?v=<?php echo time(); ?>">
   <link rel="stylesheet" href="/phpmotors/css/large.css?v=<?php echo time(); ?>">
-  <title>
-    <?php 
-      if(isset($invInfo['invMake']) && isset($invInfo['invModel'])){
-        echo "Delete $invInfo[invMake] $invInfo[invModel]";
-      } 
-    ?>
-   | PHP Motors</title>
+  <title>Delete Your Review | PHP Motors</title>
 </head>
+
 <body>
   <?php require $_SERVER['DOCUMENT_ROOT'] . '/phpmotors/snippets/header.php'; ?>
   <?php require $_SERVER['DOCUMENT_ROOT'] . '/phpmotors/snippets/nav.php'; ?>
+
   <section class="addVehicle">
-    <h1>
-      <?php
-        if(isset($invInfo['invMake']) && isset($invInfo['invModel'])) {
-          echo "Delete $invInfo[invMake] $invInfo[invModel]";
-        }
-      ?>
-    </h1>
+    <h1>Delete Your Review</h1>
     <?php
     if (isset($message)) {
       echo $message;
     }
     ?>
-    <form method="post" action="/phpmotors/vehicles/index.php" id="addVehicleForm">
+    <form method="post" action="/phpmotors/reviews/index.php" id="addVehicleForm">
       <fieldset>
-        <label for="invMake">Make*<input type="text" readonly name="invMake" id="invMake" <?php if(isset($invInfo['invMake'])) {echo "value='$invInfo[invMake]'";}?>></label>
 
-        <label for="invModel">Model*<input type="text" readonly name="invModel" id="invModel" <?php if(isset($invInfo['invModel'])) {echo "value='$invInfo[invModel]'";}?>></label>
+        <label for="reviewDate">Review Date:
+          <input type="text" name="reviewDate" id="reviewDate" 
+          <?php 
+            if (isset($specificReview)) {
+              echo "value='"
+              . date('m/d/y', strtotime($specificReview['reviewDate']))
+              . "'";
+            } 
+          ?> disabled>
+        </label>
 
-        <label for="invDescription">Description*<input type="text" readonly name="invDescription" id="invDescription" <?php if(isset($invInfo['invDescription'])) {echo "value='$invInfo[invDescription]'";}?>></label>
+        <label for="invModel">Screen Name:
+          <input type="text" name="invModel" id="invModel" 
+          <?php 
+            if (isset($specificReview)) {
+              echo "value='"
+              . substr($specificReview['clientFirstname'], 0, 1)
+              . substr($specificReview['clientLastname'], 0)
+              . "'";
+            } 
+          ?> disabled>
+        </label>
 
-        <input type="submit" class="addButton" name="submit" id="addButton" value="Delete Vehicle">
-        <input type="hidden" name="action" value="deleteVehicle">
-        <input type="hidden" name="invId" value="<?php if(isset($invInfo['invId'])){ echo $invInfo['invId'];} ?>">
+        <label for="reviewText">Review:<br>
+          <textarea type="text" name="reviewText" id="reviewText" id="reviewTextUpdate" disabled><?php if (isset($specificReview)) {echo $specificReview['reviewText'];}?></textarea>
+        </label>
+
+        <input type="submit" class="addButton" id="addButton"  name="submit" value="Delete Review">
+        <input type="hidden" name="action" value="reviewDeleted">
+        <input type="hidden" name="reviewId" value="<?php if(isset($specificReview['reviewId'])){ echo $specificReview['reviewId'];} elseif(isset($reviewId)){ echo $reviewId; } ?>">
+
       </fieldset>
     </form>
   </section>
 
   <?php require $_SERVER['DOCUMENT_ROOT'] . '/phpmotors/snippets/footer.php'; ?>
 </body>
+
 </html>
+<?php unset($_SESSION['message']); ?>

@@ -49,10 +49,10 @@ switch ($action) {
     $imageCheck = checkExistingImage($imgName);
         
     if($imageCheck){
-      $message = '<p class="notice">An image by that name already exists.</p>';
+      $message = '<p class="notice" id="redMessage">An image by that name already exists.</p>';
     } 
     elseif (empty($invId) || empty($imgName)) {
-      $message = '<p class="notice">You must select a vehicle and image file for the vehicle.</p>';
+      $message = '<p class="notice" id="redMessage">You must select a vehicle and image file for the vehicle.</p>';
     } 
     else {
       // Upload the image, store the returned path to the file
@@ -63,9 +63,9 @@ switch ($action) {
         
     // Set a message based on the insert result
     if ($result) {
-    $message = '<p class="notice">Image upload successful.</p>';
+    $message = '<p class="notice" id="greenMessage">Image upload successful.</p>';
     } else {
-    $message = '<p class="notice">Image upload failed. Please try again.</p>';
+    $message = '<p class="notice" id="redMessage">Image upload failed. Please try again.</p>';
     }
     }
         
@@ -98,9 +98,9 @@ switch ($action) {
           
     // Set a message based on the delete result
     if ($remove) {
-    $message = "<p class='notice'>$filename was successfully deleted.</p>";
+    $message = "<p class='notice' id='greenMessage'>$filename was successfully deleted.</p>";
     } else {
-    $message = "<p class='notice'>$filename failed to delete. Please try again.</p>";
+    $message = "<p class='notice' id='redMessage'>$filename failed to delete. Please try again.</p>";
     }
           
     // Store message to session

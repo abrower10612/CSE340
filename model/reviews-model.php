@@ -44,7 +44,6 @@ function getClientReviews($clientId) {
 
 
 // get a specific review 
-// UPDATE ME
 function getSpecificReview($reviewId) {
   $db = phpmotorsConnect(); 
   $sql = ' SELECT * FROM reviews JOIN clients WHERE reviewId = :reviewId AND reviews.clientId = clients.clientId'; 
@@ -58,30 +57,31 @@ function getSpecificReview($reviewId) {
 
 
 // update a specific review 
-// UPDATE ME
-function updateReview() {
-  $db = phpmotorsConnect(); 
-  $sql = ' SELECT * FROM inventory WHERE classificationId = :classificationId'; 
-  $stmt = $db->prepare($sql); 
-  $stmt->bindValue(':classificationId', $classificationId, PDO::PARAM_INT); 
-  $stmt->execute(); 
-  $inventory = $stmt->fetchAll(PDO::FETCH_ASSOC); 
-  $stmt->closeCursor(); 
-  return $inventory; 
+// UPDATE ME - IN PROGRESS
+function updateReview($reviewText, $reviewId) {
+  $db = phpmotorsConnect();
+  $sql = 'UPDATE reviews SET reviewText = :reviewText WHERE reviewId = :reviewId';
+  $stmt = $db->prepare($sql);
+  $stmt->bindValue(':reviewText', $reviewText, PDO::PARAM_STR);
+  $stmt->bindValue(':reviewId', $reviewId, PDO::PARAM_INT);
+  $stmt->execute();
+  $rowsChanged = $stmt->rowCount();
+  $stmt->closeCursor();
+  return $rowsChanged;
 }
 
 
 // delete a specific review 
 // UPDATE ME
-function deleteReview() {
-  $db = phpmotorsConnect(); 
-  $sql = ' SELECT * FROM inventory WHERE classificationId = :classificationId'; 
-  $stmt = $db->prepare($sql); 
-  $stmt->bindValue(':classificationId', $classificationId, PDO::PARAM_INT); 
-  $stmt->execute(); 
-  $inventory = $stmt->fetchAll(PDO::FETCH_ASSOC); 
-  $stmt->closeCursor(); 
-  return $inventory; 
+function deleteReview($reviewId) {
+  $db = phpmotorsConnect();
+  $sql = 'DELETE FROM reviews WHERE reviewId = :reviewId';
+  $stmt = $db->prepare($sql);
+  $stmt->bindValue(':reviewId', $reviewId, PDO::PARAM_INT);
+  $stmt->execute();
+  $rowsChanged = $stmt->rowCount();
+  $stmt->closeCursor();
+  return $rowsChanged;
 }
 
 ?>
