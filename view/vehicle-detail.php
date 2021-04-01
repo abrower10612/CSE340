@@ -39,17 +39,20 @@
           echo '<p>Be the first to write a review</p>';
         }
         else {
+          echo '<section id=postedReviews>';
           foreach ($vehicleReviews as $review) {
             echo '<section id="reviews">';
             echo '<p>On '
-            . substr($review['reviewDate'], 0, 10)
+            . date('m/d/y', strtotime($review['reviewDate']))
             . ', '
             . substr($review['clientFirstname'], 0, 1)
             . substr($review['clientLastname'], 0)
-            . ' wrote: <br>'
+            . ' wrote: </p><br>'
+            . '<p>'
             . $review['reviewText']
-            . '<hr>';
+            . '</p></section>';
           }
+          echo '</section';
         }
     ?>
     </section>

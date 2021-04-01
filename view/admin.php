@@ -2,6 +2,7 @@
   if (!$_SESSION['loggedin']) {
     header('Location: /phpmotors/index.php');
   }
+
 ?><!DOCTYPE html>
 <html lang="en">
 
@@ -57,6 +58,30 @@
     <h2>Account Management</h2>
     <p>Use this link to update account information:</p>
     <a href="/phpmotors/accounts/index.php?action=accountMod">Update Account Information</a>
+
+    <h2>Review Management</h2>
+    <p>Update or delete a review:</p>
+
+    <?php
+      $clientReviews = getClientReviews($_SESSION['clientData']['clientId']);
+      foreach ($clientReviews as $review) {
+        echo '<p>'
+        . '<a href="/phpmotors/reviews/index.php?action=editReview&reviewId='
+        . $review['reviewId']
+        . '">Edit</a>'
+        . ' '
+        . '<a href="/phpmotors/reviews/index.php?action=deleteReview&reviewId='
+        . $review['reviewId']
+        . '">Delete</a>'
+        . ' '
+        . date('m/d/y', strtotime($review['reviewDate']))
+        . ' '
+        . $review['invMake']
+        . ' '
+        . $review['invModel']
+        . '</p>';
+      }
+    ?>
 
     <?php
       if($_SESSION['clientData']['clientLevel'] > 1) {

@@ -11,6 +11,9 @@ require_once $_SERVER['DOCUMENT_ROOT'] . '/phpmotors/model/main-model.php';
 require_once $_SERVER['DOCUMENT_ROOT'] . '/phpmotors/model/accounts-model.php';
 // Get the functions library
 require_once $_SERVER['DOCUMENT_ROOT'] . '/phpmotors/library/functions.php';
+// Get the reviews model
+require_once $_SERVER['DOCUMENT_ROOT'] . '/phpmotors/model/reviews-model.php';
+
 
 // call the navList function found in functions.php
 $navList = navList($classifications);
@@ -123,6 +126,7 @@ switch ($action) {
     break;
 
   case 'admin':
+
     include $_SERVER['DOCUMENT_ROOT'] . '/phpmotors/view/admin.php';
     break;
 

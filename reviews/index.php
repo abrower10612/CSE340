@@ -8,10 +8,11 @@ require_once $_SERVER['DOCUMENT_ROOT'] . '/phpmotors/library/connections.php';
 require_once $_SERVER['DOCUMENT_ROOT'] . '/phpmotors/model/main-model.php';
 // Get the functions library
 require_once $_SERVER['DOCUMENT_ROOT'] . '/phpmotors/library/functions.php';
-// get the reviews-model
-require_once $_SERVER['DOCUMENT_ROOT'] . '/phpmotors/model/reviews-model.php';
 // get the vehicles-model
 require_once $_SERVER['DOCUMENT_ROOT'] . '/phpmotors/model/vehicles-model.php';
+// get the reviews model
+require_once $_SERVER['DOCUMENT_ROOT'] . '/phpmotors/model/reviews-model.php';
+
 
 
 // create or access a session
@@ -47,17 +48,22 @@ switch ($action) {
 
   // deliver a view to edit a review
   case 'editReview':
-    include $_SERVER['DOCUMENT_ROOT'] . '/phpmotors/view/template.php';
+
+    $reviewId = filter_input(INPUT_GET, 'reviewId', FILTER_SANITIZE_NUMBER_INT);
+
+    $specificReview = getSpecificReview($reviewId);
+
+    include $_SERVER['DOCUMENT_ROOT'] . '/phpmotors/view/review-update.php';
     break;
 
   // handle the review update
   case 'reviewEdited':
-    include $_SERVER['DOCUMENT_ROOT'] . '/phpmotors/view/template.php';
+    include $_SERVER['DOCUMENT_ROOT'] . '/phpmotors/accounts/index.php';
     break;
 
   // deliver a view to confirm deletion of a review
   case 'deleteReview':
-    include $_SERVER['DOCUMENT_ROOT'] . '/phpmotors/view/template.php';
+    include $_SERVER['DOCUMENT_ROOT'] . '/phpmotors/view/review-delete.php';
     break;
 
   // handle the review deletion

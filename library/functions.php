@@ -108,7 +108,7 @@ function buildClassificationList($classifications){
 
  function reviewSection($vehicleInfo) {
   $rs = "<h3>Review the $vehicleInfo[invMake] $vehicleInfo[invModel]</h3>"
-  . '<form method="post" action="/phpmotors/reviews/">'
+  . '<form method="post" action="/phpmotors/reviews/" id="reviewForm">'
   . '<fieldset>'
   . '<label>Screen Name:</label><br>'
   . '<input value="'
@@ -116,7 +116,7 @@ function buildClassificationList($classifications){
   . substr($_SESSION["clientData"]["clientLastname"], 0)
   . '" name="screenName" id="screenName" disabled><br>' 
   . '<label>Review:</label><br>'
-  . '<textarea cols="50" rows="10" name="review" id="review"></textarea><br>'
+  . '<textarea name="review" id="review"></textarea><br>'
   . '<input type="submit" name="submit" id="submitReview" value="Submit Review">'
   . '<input type="hidden" name="action" value="addReview">';
   $rs .= '<input type="hidden" name="invId" value="'
@@ -129,21 +129,6 @@ function buildClassificationList($classifications){
   . '</form>';
   return $rs;
  }
-
-//  //for all reviews by invId
-// function buildReviewDisplay($reviewDisplay)
-// {
-//     $dv = '<div class="review-display">';
-//     foreach ($reviewDisplay as $review) {
-//         $newFN   = substr($review['clientFirstname'], 0, 1);
-//         $lastN   = $review['clientLastname'];
-//         $newDate = substr($review['reviewDate'], 0, 10);
-//         $dv .= "<span> $newFN$lastN wrote on $newDate:</span>";
-//         $dv .= "<p> $review[reviewText]</p>";
-//     }
-//     $dv .= '</div>';
-//     return $dv;
-// }
 
 
 // **********************************************************

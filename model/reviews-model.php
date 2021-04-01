@@ -31,30 +31,29 @@ function getVehicleReviews($invId) {
 
 
 // get reviews written by a specific client 
-// UPDATE ME
-function getClientReviews() {
+function getClientReviews($clientId) {
   $db = phpmotorsConnect(); 
-  $sql = ' SELECT * FROM inventory WHERE classificationId = :classificationId'; 
+  $sql = ' SELECT * FROM reviews JOIN inventory WHERE clientId = :clientId AND reviews.invId = inventory.invId'; 
   $stmt = $db->prepare($sql); 
-  $stmt->bindValue(':classificationId', $classificationId, PDO::PARAM_INT); 
+  $stmt->bindValue(':clientId', $clientId, PDO::PARAM_INT); 
   $stmt->execute(); 
-  $inventory = $stmt->fetchAll(PDO::FETCH_ASSOC); 
+  $clientReviews = $stmt->fetchAll(PDO::FETCH_ASSOC); 
   $stmt->closeCursor(); 
-  return $inventory; 
+  return $clientReviews; 
 }
 
 
 // get a specific review 
 // UPDATE ME
-function getSpecificReview() {
+function getSpecificReview($reviewId) {
   $db = phpmotorsConnect(); 
-  $sql = ' SELECT * FROM inventory WHERE classificationId = :classificationId'; 
+  $sql = ' SELECT * FROM reviews JOIN clients WHERE reviewId = :reviewId AND reviews.clientId = clients.clientId'; 
   $stmt = $db->prepare($sql); 
-  $stmt->bindValue(':classificationId', $classificationId, PDO::PARAM_INT); 
+  $stmt->bindValue(':reviewId', $reviewId, PDO::PARAM_INT); 
   $stmt->execute(); 
-  $inventory = $stmt->fetchAll(PDO::FETCH_ASSOC); 
+  $reviewInfo = $stmt->fetch(PDO::FETCH_ASSOC); 
   $stmt->closeCursor(); 
-  return $inventory; 
+  return $reviewInfo; 
 }
 
 
