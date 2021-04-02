@@ -39,5 +39,5 @@
 
   <?php require $_SERVER['DOCUMENT_ROOT'] . '/phpmotors/snippets/footer.php'; ?>
 </body>
-
 </html>
+<?php unset($_SESSION['message']); ?>

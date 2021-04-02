@@ -72,5 +72,5 @@ if($_SESSION['clientData']['clientLevel'] < 2)
 
   <?php require $_SERVER['DOCUMENT_ROOT'] . '/phpmotors/snippets/footer.php'; ?>
 </body>
-
 </html>
+<?php unset($_SESSION['message']); ?>

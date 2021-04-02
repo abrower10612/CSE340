@@ -21,7 +21,9 @@
     }
   ?>
   <?php
+  if (isset($vehicleDisplay)) {
     echo $vehicleDisplay;
+  }
   ?>
   <?php require $_SERVER['DOCUMENT_ROOT'] . '/phpmotors/snippets/footer.php'; ?>  
 </body>

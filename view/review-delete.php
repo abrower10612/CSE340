@@ -50,7 +50,7 @@
         </label>
 
         <label for="reviewText">Review:<br>
-          <textarea type="text" name="reviewText" id="reviewText" id="reviewTextUpdate" disabled><?php if (isset($specificReview)) {echo $specificReview['reviewText'];}?></textarea>
+          <textarea name="reviewText" id="reviewText" disabled><?php if (isset($specificReview)) {echo $specificReview['reviewText'];}?></textarea>
         </label>
 
         <input type="submit" class="addButton" id="addButton"  name="submit" value="Delete Review">

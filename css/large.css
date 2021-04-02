@@ -1,8 +1,10 @@
 @media screen and (min-width: 600px) {
 
   html {
-    background-image: url("../images/site/small_check.jpg");
-    background-size: cover;
+    background-image: url("../images/site/lorenzo-moschi-MNSf5U1gkUc-unsplash.jpg");
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: 100%;
     }
 
   header {
@@ -306,6 +308,13 @@
 		width: 100%;
 	}
 
+  /* CLIENT ADMIN VIEW */
+
+  .addVehicle textarea {
+    width: 50%;
+    height: 200px;
+  }
+
   /* VEHICLE DETAILS PAGE */
 
   #vehicleInfo-display {
@@ -448,6 +457,10 @@
   .imgAdmin p {
     font-size: 1.1em;
     text-align: left;
+  }
+
+  #updateReview {
+    max-width: 50%;
   }
 
 }

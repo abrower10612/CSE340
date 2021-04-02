@@ -80,7 +80,8 @@ switch ($action) {
     
     // Check for missing data
     if (empty($invMake) || empty($invModel) || empty($invDescription) || empty($invImage) || empty($invThumbnail) || empty($invPrice) || empty($invStock) || empty($invColor) || empty($classificationId)) {
-      $_SESSION['message'] = '<p class="message">Please provide all of the required information for the vehicle you would like to add.</p>';
+      $message = '<p class="message" id="redMessage">Please provide all of the required information for the vehicle you would like to add.</p>';
+      $_SESSION['message'] = $message;
       include $_SERVER['DOCUMENT_ROOT'] . '/phpmotors/view/addVehicle.php';
       exit;
     }

@@ -15,8 +15,10 @@
 <body>
   <?php require $_SERVER['DOCUMENT_ROOT'] . '/phpmotors/snippets/header.php'; ?>
   <?php require $_SERVER['DOCUMENT_ROOT'] . '/phpmotors/snippets/nav.php'; ?>
-  <h1>Server Error</h1>
-  <h2>Sorry our server seems to be experiencing some technical difficulties</h2>
+  <section id="errorView">
+    <h1>Server Error</h1>
+    <h2>Sorry our server seems to be experiencing some technical difficulties</h2>
+  </section>
   <?php require $_SERVER['DOCUMENT_ROOT'] . '/phpmotors/snippets/footer.php'; ?>
 </body>
 

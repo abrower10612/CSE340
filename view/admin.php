@@ -59,17 +59,35 @@
     <p>Use this link to update account information:</p>
     <a href="/phpmotors/accounts/index.php?action=accountMod">Update Account Information</a>
 
+    <?php
+      if($_SESSION['clientData']['clientLevel'] > 1) {
+        echo '<h2>Inventory Management</h2>';
+        echo '<p>Use this link to update vehicle information:</p>';
+        echo '<p><a href="/phpmotors/vehicles">Vehicle Management</a>';
+      }
+    ?>
+
     <h2>Review Management</h2>
 
     <?php
       $clientReviews = getClientReviews($_SESSION['clientData']['clientId']);
       if (!$clientReviews) {
-        echo '<p>You haven\'t reviewed any vehicles yet!</p>';
+        echo '<p>You haven\'t reviewed any vehicles yet.</p>';
       }
       else {
         echo '<p>Update or delete a review:</p>';
         foreach ($clientReviews as $review) {
-          echo '<p>'
+          echo '<section id="updateReview">'
+          . '<div>'
+          . '<h3>'
+          . 'Vehicle: '
+          . $review['invMake']
+          . ' '
+          . $review['invModel']
+          . '<br> Date: '
+          . date('m/d/y', strtotime($review['reviewDate']))
+          . '</h3>'
+          . '<hr>'
           . '<a href="/phpmotors/reviews/index.php?action=editReview&reviewId='
           . $review['reviewId']
           . '">Edit</a>'
@@ -77,24 +95,14 @@
           . '<a href="/phpmotors/reviews/index.php?action=deleteReview&reviewId='
           . $review['reviewId']
           . '">Delete</a>'
-          . ' '
-          . date('m/d/y', strtotime($review['reviewDate']))
-          . ' '
-          . $review['invMake']
-          . ' '
-          . $review['invModel']
-          . '</p>';
+          . '</div>'
+          . '<p>'
+          . $review['reviewText']
+          . '</p><br> '
+          . '</section>';
         }
       }
 
-    ?>
-
-    <?php
-      if($_SESSION['clientData']['clientLevel'] > 1) {
-        echo '<h2>Inventory Management</h2>';
-        echo '<p>Use this link to update vehicle information:</p>';
-        echo '<p><a href="/phpmotors/vehicles">Vehicle Management</a>';
-      }
     ?>
   </main>
   <?php require $_SERVER['DOCUMENT_ROOT'] . '/phpmotors/snippets/footer.php'; ?>  

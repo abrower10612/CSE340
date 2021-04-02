@@ -26,35 +26,35 @@
       }
     ?>
     <section class="reviewsContainer">
-    <h2>Customer Reviews</h2>
-    <?php
-        if (isset($_SESSION['loggedin'])) {
-          echo $reviewSection;
-        }
-        else {
-          echo '<p>You must <a href="/phpmotors/accounts/index.php?action=login">login</a> to write a review';
-        }
-
-        if (!$vehicleReviews) {
-          echo '<p>Be the first to write a review</p>';
-        }
-        else {
-          echo '<section id=postedReviews>';
-          foreach ($vehicleReviews as $review) {
-            echo '<section id="reviews">';
-            echo '<p>On '
-            . date('m/d/y', strtotime($review['reviewDate']))
-            . ', '
-            . substr($review['clientFirstname'], 0, 1)
-            . substr($review['clientLastname'], 0)
-            . ' wrote: </p><br>'
-            . '<p>'
-            . $review['reviewText']
-            . '</p></section>';
+      <h2>Customer Reviews</h2>
+      <?php
+          if (isset($_SESSION['loggedin'])) {
+            echo $reviewSection;
           }
-          echo '</section';
-        }
-    ?>
+          else {
+            echo '<p>You must <a href="/phpmotors/accounts/index.php?action=login">login</a> to write a review';
+          }
+
+          if (!$vehicleReviews) {
+            echo '<p id="greenMessage">Be the first to write a review!</p>';
+          }
+          else {
+            echo '<section id=postedReviews>';
+            foreach ($vehicleReviews as $review) {
+              echo '<section id="reviews">';
+              echo '<p>On '
+              . date('m/d/y', strtotime($review['reviewDate']))
+              . ', '
+              . substr($review['clientFirstname'], 0, 1)
+              . substr($review['clientLastname'], 0)
+              . ' wrote: </p><br>'
+              . '<p>'
+              . $review['reviewText']
+              . '</p></section>';
+            }
+            echo '</section';
+          }
+      ?>
     </section>
   <?php require $_SERVER['DOCUMENT_ROOT'] . '/phpmotors/snippets/footer.php'; ?>  
 </body>

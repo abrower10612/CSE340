@@ -47,17 +47,18 @@ switch ($action) {
     // checking for an existing email address
     $existingEmail = checkExistingEmail($clientEmail);
 
-    // if email already exists, provide message telling user
-    if ($existingEmail) {
-      $_SESSION['message'] = '<p class="notice"> The email address you entered already exists in the system. Use a different email or try logging in instead.</p>';
-      include $_SERVER['DOCUMENT_ROOT'] . '/phpmotors/view/login.php';
-      exit;
-    }
-  
+      
     // Check for missing data
     if (empty($clientFirstname) || empty($clientLastname) || empty($clientEmail) || empty($checkPassword)) {
-      $_SESSION['message'] = '<p>Please provide information for all empty form fields.</p>';
+      $_SESSION['message'] = '<p id="redMessage">Please provide information for all empty form fields.</p>';
       include $_SERVER['DOCUMENT_ROOT'] . '/phpmotors/view/registration.php';
+      exit;
+    }
+
+    // if email already exists, provide message telling user
+    if ($existingEmail) {
+      $_SESSION['message'] = '<p class="notice" id="redMessage"> The email address you entered already exists in the system. Use a different email or try logging in instead.</p>';
+      include $_SERVER['DOCUMENT_ROOT'] . '/phpmotors/view/login.php';
       exit;
     }
 
@@ -89,7 +90,7 @@ switch ($action) {
 
     // Check for missing data
     if (empty($clientEmail) || empty($clientPassword)) {
-      $_SESSION['message'] = '<p>Please provide information for all empty form fields.</p>';
+      $_SESSION['message'] = '<p id="redMessage">Please provide information for all empty form fields.</p>';
       include $_SERVER['DOCUMENT_ROOT'] . '/phpmotors/view/login.php';
       exit;
     } 

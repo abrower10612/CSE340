@@ -9,16 +9,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Yusei+Magic&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="/phpmotors/css/small.css?v=<?php echo time(); ?>">
   <link rel="stylesheet" href="/phpmotors/css/large.css?v=<?php echo time(); ?>">
-  <title>
-    <?php 
-      if(isset($invInfo['invMake']) && isset($invInfo['invModel'])){
-        echo "Modify $invInfo[invMake] $invInfo[invModel]";
-      } 
-      elseif(isset($invMake) && isset($invModel)) {
-        echo "Modify $invMake $invModel";  
-      }
-    ?>
-   | PHP Motors</title>
+  <title>Update Your Review | PHP Motors</title>
 </head>
 
 <body>
@@ -59,7 +50,7 @@
         </label>
 
         <label for="reviewText">Review:<br>
-          <textarea type="text" name="reviewText" id="reviewText" id="reviewTextUpdate"required><?php if (isset($specificReview)) {echo $specificReview['reviewText'];}?></textarea>
+          <textarea name="reviewText" id="reviewText" required><?php if (isset($specificReview)) {echo $specificReview['reviewText'];}?></textarea>
         </label>
 
         <input type="submit" class="addButton" id="addButton"  name="submit" value="Update Review">

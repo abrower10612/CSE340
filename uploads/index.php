@@ -126,6 +126,9 @@ switch ($action) {
     $vehicles = getVehicles();
     // Build a select list of vehicle information for the view
     $prodSelect = buildVehiclesSelect($vehicles);
+
+    // var_dump($prodSelect);
+    // exit;
           
     include '../view/image-admin.php';
     exit;
