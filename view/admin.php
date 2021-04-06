@@ -85,7 +85,7 @@
           . ' '
           . $review['invModel']
           . '<br> Date: '
-          . date('m/d/y', strtotime($review['reviewDate']))
+          . date('m/d/y h:m', strtotime($review['reviewDate']))
           . '</h3>'
           . '<hr>'
           . '<a href="/phpmotors/reviews/index.php?action=editReview&reviewId='

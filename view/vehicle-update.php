@@ -1,4 +1,7 @@
 <?php 
+  if (!isset($_SESSION))
+    session_start();
+
   if($_SESSION['clientData']['clientLevel'] < 2)
     header('Location: /phpmotors/index.php');
 
@@ -60,8 +63,8 @@
       ?>
     </h1>
     <?php
-    if (isset($message)) {
-      echo $message;
+    if (isset($_SESSION['message'])) {
+      echo $_SESSION['message'];
       unset($_SESSION['message']); 
     }
     ?>
@@ -84,9 +87,9 @@
 
         <label for="invDescription">Description* <input type="text" name="invDescription" id="invDescription" <?php if (isset($invDescription)) {echo "value='$invDescription'";} elseif(isset($invInfo['invDescription'])) {echo "value='$invInfo[invDescription]'";} ?> required></label>
 
-        <label for="invImage">Image*<input type="text" name="invImage" id="invImage" value="/phpmotors/images/no-image.png" <?php if (isset($invImage)) {echo "value='$invImage'";} elseif(isset($invInfo['invImage'])) {echo "value='$invInfo[invImage]'";} ?> required></label>
+        <label for="invImage">Image*<input type="text" name="invImage" id="invImage" <?php if (isset($invImage)) {echo "value='$invImage'";} elseif(isset($invInfo['invImage'])) {echo "value='$invInfo[invImage]'";} ?> required></label>
 
-        <label for="invThumbnail">Thumbnail*<input type="text" name="invThumbnail" id="invThumbnail" value="/phpmotors/images/no-image.png" <?php if (isset($invThumbnail)) {echo "value='$invThumbnail'";} elseif(isset($invInfo['invThumbnail'])) {echo "value='$invInfo[invThumbnail]'";} ?> required></label>
+        <label for="invThumbnail">Thumbnail*<input type="text" name="invThumbnail" id="invThumbnail" <?php if (isset($invThumbnail)) {echo "value='$invThumbnail'";} elseif(isset($invInfo['invThumbnail'])) {echo "value='$invInfo[invThumbnail]'";} ?> required></label>
 
         <label for="invPrice">Price*<input type="number" name="invPrice" id="invPrice" <?php if (isset($invPrice)) {echo "value='$invPrice'";} elseif(isset($invInfo['invPrice'])) {echo "value='$invInfo[invPrice]'";} ?> required></label>
 
@@ -106,5 +109,5 @@
 
   <?php require $_SERVER['DOCUMENT_ROOT'] . '/phpmotors/snippets/footer.php'; ?>
 </body>
-
 </html>
+<?php unset($_SESSION['message']); ?>

@@ -1,4 +1,5 @@
 <?php 
+if($_SESSION['clientData']['clientLevel'] < 2) header('Location: /phpmotors/index.php');
 //build the select list
 $classificationList = '<label for="classificationId">Classification*<br>' 
 . '<select name="classificationId" id="classificationId" required>'
@@ -15,9 +16,6 @@ foreach ($classifications as $classification) {
 }
 $classificationList .= '</select></label>';
 
-?><?php
-if($_SESSION['clientData']['clientLevel'] < 2)
-  header('Location: /phpmotors/index.php');
 ?><!DOCTYPE html>
 <html lang="en">
 
@@ -39,9 +37,7 @@ if($_SESSION['clientData']['clientLevel'] < 2)
   <section class="addVehicle">
     <h1>Add a Vehicle</h1>
     <?php
-    if (isset($message)) {
-      echo $message;
-    }
+    if (isset($message)) echo $message;
     ?>
     <form method="post" action="/phpmotors/vehicles/" id="addVehicleForm">
       <fieldset>
@@ -51,9 +47,9 @@ if($_SESSION['clientData']['clientLevel'] < 2)
 
         <label for="invDescription">Description* <input type="text" name="invDescription" id="invDescription" <?php if (isset($invDescription)) {echo "value='$invDescription'";} ?> required></label>
 
-        <label for="invImage">Image*<input type="text" name="invImage" id="invImage" value="/phpmotors/images/vehicles/no-image.png" <?php if (isset($invImage)) {echo "value='$invImage'";} ?> required></label>
+        <label for="invImage">Image*<input type="text" name="invImage" id="invImage" value="/phpmotors/images/vehicles/no-image.jpg" <?php if (isset($invImage)) {echo "value='$invImage'";} ?> required></label>
 
-        <label for="invThumbnail">Thumbnail*<input type="text" name="invThumbnail" id="invThumbnail" value="/phpmotors/images/vehicles/no-image-tn.png" <?php if (isset($invThumbnail)) {echo "value='$invThumbnail'";} ?> required></label>
+        <label for="invThumbnail">Thumbnail*<input type="text" name="invThumbnail" id="invThumbnail" value="/phpmotors/images/vehicles/no-image-tn.jpg" <?php if (isset($invThumbnail)) {echo "value='$invThumbnail'";} ?> required></label>
 
         <label for="invPrice">Price*<input type="number" name="invPrice" id="invPrice" <?php if (isset($invPrice)) {echo "value='$invPrice'";} ?> required></label>
 

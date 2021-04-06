@@ -12,6 +12,8 @@ require_once $_SERVER['DOCUMENT_ROOT'] . '/phpmotors/library/functions.php';
 require_once $_SERVER['DOCUMENT_ROOT'] . '/phpmotors/model/vehicles-model.php';
 // get the reviews model
 require_once $_SERVER['DOCUMENT_ROOT'] . '/phpmotors/model/reviews-model.php';
+// get the clients model
+require_once $_SERVER['DOCUMENT_ROOT'] . '/phpmotors/model/accounts-model.php';
 
 
 if (!isset($_SESSION)) {
@@ -35,12 +37,34 @@ switch ($action) {
     $clientId = filter_input(INPUT_POST, 'clientId', FILTER_SANITIZE_NUMBER_INT);
 
     if (empty($reviewText)) {
-      $_SESSION['message'] = '<p class="message">Please provide all of the required information for the vehicle you would like to add.</p>';
+      $_SESSION['message'] = '<p class="message" id="redMessage">The review cannot be left blank. Please fill in the review before submitting.</p>';
+      $vehicleInfo = getVehicleById($invId);
+      $thumbnails = obtainThumbnails($invId);
+
+      if($vehicleInfo) {
+        $buildView = vehicleInfo($vehicleInfo, $thumbnails);
+        if(isset($_SESSION['loggedin'])) {
+          $clientEmail = $_SESSION['clientData']['clientEmail'];
+          $clientInfo = getClient($clientEmail);
+          $reviewSection = reviewSection($vehicleInfo);
+        }
+      }
+      else {
+        $message = '<p class="notice" id="redMessage">Sorry, no vehicle information could be found for your selection</p>';
+        $_SESSION['message'] = $message;
+        include $_SERVER['DOCUMENT_ROOT'] . '/phpmotors/view/vehicle-detail.php';
+        exit;
+      }
+  
+      $vehicleReviews = getVehicleReviews($invId);
       include $_SERVER['DOCUMENT_ROOT'] . '/phpmotors/view/vehicle-detail.php';
       exit;
     }
 
     $reviewOutcome = insertReview($reviewText, $invId, $clientId);
+
+    $message = '<p class="notice" id="greenMessage">Thank you, your review was successfully submitted.</p>';
+    $_SESSION['message'] = $message;
 
     header('location: /phpmotors/vehicles?action=getVehicleInfo&invId=' . $invId);
     
@@ -72,8 +96,10 @@ switch ($action) {
     $reviewUpdateResult = updateReview($reviewText, $reviewId);
 
     if (!$reviewUpdateResult) {
-      $message = '<p class="message" id="redMessage">Review update failed. Please try again.</p>';
+      $message = '<p class="message" id="redMessage">Either no change was made or the review update failed. Please try again.</p>';
       $_SESSION['message'] = $message;
+      include $_SERVER['DOCUMENT_ROOT'] . '/phpmotors/view/review-update.php';
+      exit;
     }
     $message = '<p class="message" id="greenMessage">Your review has been successfully updated.</p>';
     $_SESSION['message'] = $message;

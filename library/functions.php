@@ -53,16 +53,16 @@ function buildClassificationList($classifications){
 
     foreach($vehicles as $vehicle) {
       $imagePath = makeThumbnail($vehicle['imgPath']);
-     $dv .= "<li><a href='/phpmotors/vehicles/index.php?action=getVehicleInfo&invId="
+      $dv .= "<li><a href='/phpmotors/vehicles/index.php?action=getVehicleInfo&invId="
       . $vehicle['invId']
       . "'>";
-     $dv .= "<img src='$imagePath' class='invImage' alt='Image of $vehicle[invMake] $vehicle[invModel] on phpmotors.com'>";
-     $dv .= '<hr>';
-     $dv .= "<h2>$vehicle[invMake] $vehicle[invModel]</h2></a>";
-     $dv .= "<span>$"; 
-     $dv .= number_format($vehicle['invPrice'], 2);
-     $dv .= "</span><br>";
-     $dv .= '</li>';
+      $dv .= "<img src='$imagePath' class='invImage' alt='Image of $vehicle[invMake] $vehicle[invModel] on phpmotors.com'>";
+      $dv .= '<hr>';
+      $dv .= "<h2>$vehicle[invMake] $vehicle[invModel]</h2></a>";
+      $dv .= "<span>$"; 
+      $dv .= number_format($vehicle['invPrice'], 2);
+      $dv .= "</span><br>";
+      $dv .= '</li>';
    }
    $dv .= '</ul>';
    return $dv; // returns the variable $dv to the controller where it is stored as $vehicleDisplay and is then ready to be used in the view
@@ -116,7 +116,7 @@ function buildClassificationList($classifications){
   . substr($_SESSION["clientData"]["clientLastname"], 0)
   . '" name="screenName" id="screenName" disabled><br>' 
   . '<label>Review:</label><br>'
-  . '<textarea name="review" id="review"></textarea><br>'
+  . '<textarea name="review" id="review" required></textarea><br>'
   . '<input type="submit" name="submit" id="submitReview" value="Submit Review">'
   . '<input type="hidden" name="action" value="addReview">';
   $rs .= '<input type="hidden" name="invId" value="'

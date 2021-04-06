@@ -34,15 +34,14 @@
           else {
             echo '<p>You must <a href="/phpmotors/accounts/index.php?action=login">login</a> to write a review';
           }
-
           if (!$vehicleReviews) {
             echo '<p id="greenMessage">Be the first to write a review!</p>';
           }
           else {
-            echo '<section id=postedReviews>';
+            echo '<div id=postedReviews>';
             foreach ($vehicleReviews as $review) {
-              echo '<section id="reviews">';
-              echo '<p>On '
+              echo '<div class="reviews">'
+              . '<p>On '
               . date('m/d/y', strtotime($review['reviewDate']))
               . ', '
               . substr($review['clientFirstname'], 0, 1)
@@ -50,12 +49,14 @@
               . ' wrote: </p><br>'
               . '<p>'
               . $review['reviewText']
-              . '</p></section>';
+              . '</p>'
+              . '</div>';
             }
-            echo '</section';
+            echo '</div>';
           }
       ?>
     </section>
   <?php require $_SERVER['DOCUMENT_ROOT'] . '/phpmotors/snippets/footer.php'; ?>  
 </body>
 </html>
+<?php unset($_SESSION['message']); ?>

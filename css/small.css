@@ -646,29 +646,29 @@ justify-content: space-between;
   color: black;
 }
 
-#reviews {
+.reviews {
   border: solid 3px #4c96d7;
   margin: 10px 0;
   padding: 20px;
 }
 
-#reviews p {
+.reviews p {
   margin: 0;
   padding: 0;
 }
 
-#reviews p:nth-of-type(1) {
+.reviews p:nth-of-type(1) {
   margin: 0;
   padding: 0;
   color: #4c96d7;
 }
 
-#reviews p {
+.reviews p {
   margin: 0;
   padding: 0;
 }
 
-#reviews hr {
+.reviews hr {
   margin: 0;
   padding: 0;
 }

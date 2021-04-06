@@ -1,7 +1,9 @@
 <?php
 
-// create or access a session
-session_start();
+if (!isset($_SESSION)) {
+  // create or access a session
+  session_start();
+}
 
 // Get the database connection file
 require_once $_SERVER['DOCUMENT_ROOT'] . '/phpmotors/library/connections.php';
@@ -31,12 +33,12 @@ switch ($action) {
 
   case 'addClassification':
     include $_SERVER['DOCUMENT_ROOT'] . '/phpmotors/view/addClassification.php';
-  break;
+    break;
 
 
   case 'addVehicle':
     include $_SERVER['DOCUMENT_ROOT'] . '/phpmotors/view/addVehicle.php';
-  break;
+    break;
 
 
   case 'classificationAdded':
@@ -46,6 +48,7 @@ switch ($action) {
     // Check for missing data
     if (empty($classificationName)) {
       $message = '<p  class="message" id="redMessage">Please provide all of the required information for the classification you would like to add.</p>';
+      $_SESSION['message'] = $message;
       include $_SERVER['DOCUMENT_ROOT'] . '/phpmotors/view/addClassification.php';
       exit;
     }
@@ -60,10 +63,11 @@ switch ($action) {
       exit;
     } else {
       $message = "<p class='message'>Classification addition failed. Please try again.</p>";
+      $_SESSION['message'] = $message;
       include $_SERVER['DOCUMENT_ROOT'] . '/phpmotors/view/vehicleManagement.php';
       exit;
     }
-  break;
+    break;
 
 
   case 'vehicleAdded':
@@ -132,7 +136,9 @@ switch ($action) {
     if (empty($invMake) || empty($invModel) || empty($invDescription) || empty($invImage) || empty($invThumbnail) || empty($invPrice) || empty($invStock) || empty($invColor) || empty($classificationId)) {
       $message = '<p class="message" id="redMessage">Please complete all information for the vehicle! Double check the classification of the item.</p>';
       $_SESSION['message'] = $message;
-      include $_SERVER['DOCUMENT_ROOT'] . '/phpmotors/view/addVehicle.php';
+      $invInfo = getInvItemInfo($invId);
+
+      header('location: /phpmotors/vehicles/index.php?action=mod&id=' . $invId);
       exit;
     }
 
@@ -140,19 +146,17 @@ switch ($action) {
     $updateResult = updateVehicle($invMake, $invModel, $invDescription, $invImage, $invThumbnail, $invPrice, $invStock, $invColor, $classificationId, $invId);
 
     // Check and report the result
-    if ($updateResult) {
-      $message = '<p class="message" id="greenMessage">' . $invMake . ' ' . $invModel . ' successfully updated.</p>';
-      $_SESSION['message'] = $message;
-      header('location: /phpmotors/vehicles/');
-      exit;
-    } 
-    else {
-      $message = '<p class="message" id="redMessage">Vehicle update failed. Please try again.</p>';
+    if (!$updateResult) {
+      $message = '<p class="message" id="redMessage">Either no change was made or the vehicle update failed. Please try again.</p>';
       $_SESSION['message'] = $message;
       include $_SERVER['DOCUMENT_ROOT'] . '/phpmotors/view/vehicle-update.php';
       exit;
-    }
-  break;
+    } 
+
+    $message = '<p class="message" id="greenMessage">' . $invMake . ' ' . $invModel . ' successfully updated.</p>';
+    $_SESSION['message'] = $message;
+    header('location: /phpmotors/vehicles/');
+    break;
 
 
   case 'mod':
@@ -163,7 +167,7 @@ switch ($action) {
       $_SESSION['message'] = $message;
     }
     include $_SERVER['DOCUMENT_ROOT'] . '/phpmotors/view/vehicle-update.php';
-  break;
+    break;
 
 
   case 'del':
@@ -207,7 +211,7 @@ switch ($action) {
     // to filter, sanitize, and store the second value being sent through the URL
     $classificationName = filter_input(INPUT_GET, 'classificationName', FILTER_SANITIZE_STRING); 
     // variable for storing the array of vehicles that is returned from the vehicles model.
-    $vehicles = getVehiclesByClassification($classificationName); 
+    $vehicles = getVehiclesByClassification($classificationName);
     if(!count($vehicles)) {
       $message = '<p class="notice" id="redMessage">Sorry, no ' . $classificationName . ' vehicles could be found.</p>';
       $_SESSION['message'] = $message;
